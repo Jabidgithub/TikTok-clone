@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_tiktok/controllers/upload_video_controller.dart';
 import 'package:flutter_tiktok/views/widgets/text_input_field.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class ConfirmScreen extends StatefulWidget {
@@ -19,8 +21,10 @@ class ConfirmScreen extends StatefulWidget {
 
 class _ConfirmScreenState extends State<ConfirmScreen> {
   late VideoPlayerController controller;
-  TextEditingController songController = TextEditingController();
-  TextEditingController captionController = TextEditingController();
+  TextEditingController _songController = TextEditingController();
+  TextEditingController _captionController = TextEditingController();
+  UploadVideoController uploadVideoController =
+      Get.put(UploadVideoController());
 
   @override
   void initState() {
@@ -46,7 +50,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 0.5,
+              height: MediaQuery.of(context).size.height * 0.7,
               child: VideoPlayer(controller),
             ),
             SizedBox(
@@ -61,7 +65,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     width: MediaQuery.of(context).size.width - 20,
                     child: TextInputField(
-                      controller: songController,
+                      controller: _songController,
                       labelText: 'Song name',
                       icon: Icons.music_note,
                     ),
@@ -73,7 +77,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     width: MediaQuery.of(context).size.width - 20,
                     child: TextInputField(
-                      controller: captionController,
+                      controller: _captionController,
                       labelText: 'Caption',
                       icon: Icons.closed_caption,
                     ),
@@ -82,7 +86,10 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      uploadVideoController.uploadVideo(_songController.text,
+                          _captionController.text, widget.videoPath);
+                    },
                     child: const Text(
                       'Share!',
                       style: TextStyle(
