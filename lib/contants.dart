@@ -3,6 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tiktok/controllers/auth_controller.dart';
+import 'package:flutter_tiktok/views/screens/add_video_screen.dart';
+
+const pages = [
+  Text('Home Screen'),
+  Text('Search Screen'),
+  AddVideoScreen(),
+  Text('Messages Screen'),
+  Text('Profile Screen'),
+];
 
 // COLORS
 const backgroundColor = Colors.black;
