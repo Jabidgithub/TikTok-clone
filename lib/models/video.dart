@@ -54,8 +54,8 @@ class Video {
       songName: snapShot["songName"],
       caption: snapShot["caption"],
       videoUrl: snapShot["videoUrl"],
-      thumbnail: snapShot["thumbnail"],
       profilePhoto: snapShot["profilePhoto"],
+      thumbnail: snapShot["thumbnail"],
     );
   }
 }
